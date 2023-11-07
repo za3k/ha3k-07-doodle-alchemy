@@ -1,0 +1,63 @@
+<html>
+<head>
+    <link rel="stylesheet" href="index.css">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="index.js"></script>
+</head>
+
+<body>
+
+<!--
+Doodlemoji Alchemy
+TODO:
+    [x] Display four element cards at the top
+    [x] Display cards in equations
+    [ ] Allow dragging and dropping cards into equations (steal from hack-a-tile)
+    [ ] Make a new equations if they're all full
+    [ ] Allow picking a new result when combining two cards. Remember the result
+    [ ] Add localstorage save games
+    [ ] Allow drawing a new card, and rendering drawn cards (steal from doodle-rpg)
+    [ ] Jen draws the four basic elements, + and =>
+    [ ] Add progress tracking to discovering 20 [8] elements.
+    [ ] Add random results when combining cards
+          (  N/20) pick an existing card
+          (1-N/20) name + draw a new card
+    [ ] Add downloading the finished game as an image
+-->
+
+<h1>Doodlemoji alchemy</h1>
+<h3>Elements</h3>
+<div class="discoveredElements">
+    <div class="card fire  draggable" data-element="fire" ><span class="name">fire</span></div>
+    <div class="card earth draggable" data-element="earth"><span class="name">earth</span></div>
+    <div class="card water draggable" data-element="water"><span class="name">water</span></div>
+    <div class="card air   draggable" data-element="air"  ><span class="name">air</span></div>
+    <div class="card question"></div>
+    <div class="card question"></div>
+    <div class="card question"></div>
+    <div class="card question"></div>
+    <div class="card question"></div>
+    <div class="card question"></div>
+    <div class="card question"></div>
+    <div class="card question"></div>
+    <div class="card question"></div>
+    <div class="card question"></div>
+    <div class="card question"></div>
+    <div class="card question"></div>
+    <div class="card question"></div>
+    <div class="card question"></div>
+    <div class="card question"></div>
+    <div class="card question"></div>
+</div>
+<h3>Alchemy Log</h3> <!-- Equations -->
+<div class="equations">
+    <div class="equation">
+        <div class="slot"></div>
+        <div class="card plus"></div>
+        <div class="slot"></div>
+        <div class="card equals"></div>
+        <div class="card question"></div>
+    </div>
+</div>
+</html>

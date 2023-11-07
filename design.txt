@@ -1,0 +1,24 @@
+Doodle Alchemy
+
+Some starting cards:
+    Fire
+    Water
+    Earth
+    Air
+
+Combine two cards -> Get a new card
+    (  N/20) pick an existing card
+    (1-N/20) name + draw a new card
+
+Drawing: steal from doodle-rpg.com
+
+Card rendering: do from scratch probably
+
+Drag+drop: steal from hack-a-tile (from scratch)
+
+Goal: Discover all 20 elements
+Download the finished game as ONE image.
+
+[ ] + [ ] => [ ]
+
+[X] Offer link to finished game. (requires server)

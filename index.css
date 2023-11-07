@@ -1,0 +1,54 @@
+
+.slot {
+    width: 5rem;
+    height: 7rem;
+    border: 3px dashed grey;
+    margin: 0.5rem;
+    position: relative;
+}
+.card {
+    width: 5rem;
+    height: 7rem;
+    border: 1px solid black;
+    margin: 0.5rem;
+    justify-content: center;
+    display: flex;
+    position: relative;
+    font-size: 4rem;
+    text-align: center;
+    border-radius: 5px;
+    overflow: clip;
+}
+.card .name {
+    display: block;
+    position: absolute;
+    text-align: center;
+    font-size: 1rem;
+    margin: 0px;
+    box-sizing: border-box;
+    bottom: 0;
+    left: -10px;
+    right: -10px;
+    background: lightgrey;
+
+}
+.card.plus, .card.equals { border: 0; }
+.card.plus::before     { content: "+"; }
+.card.equals::before   { content: "➡"; }
+.card.question::before { content: "?"; }
+
+.card.fire::before  { content: "🔥"; }
+.card.water::before { content: "🌊"; }
+.card.earth::before { content: "⛰️"; }
+.card.air::before   { content: "💨"; }
+
+.discoveredElements {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.equation {
+    display: flex;
+    flex-wrap: wrap;
+}
+
