@@ -11,17 +11,6 @@ const gameData = {
 }
 
 const game = {
-    onDragDrop(card, slot) {
-        slot.replaceWith(card);
-        if (card.parent().hasClass("equation")) {
-            const equation = card.parent();
-            if (!equation.find(".slot").exists()) {
-                const cards = equation.find(".card");
-                assert(cards.length == 5, "Equation looks weird.");
-                game.combine($(cards[0]), $(cards[2]), $(cards[4]));
-            }
-        }
-    },
     async combine(card1, card2, outcome) {
         console.log(`${card1.data("element")} plus ${card2.data("element")} equals ${outcome}`);
         const key = `${card1.data("element")}-${card2.data("element")}`;
@@ -48,7 +37,16 @@ const game = {
         return c1.clone();
     },
     addEmptyEquation() {
-        $(".equations").prepend('    <div class="equation"> <div class="slot"></div> <div class="card plus"></div> <div class="slot"></div> <div class="card equals"></div> <div class="card question"></div> </div>')
+        const eq = $('<div class="equation"> <div class="slot"></div> <div class="card plus"></div> <div class="slot"></div> <div class="card equals"></div> <div class="card question"></div> </div>')
+        eq.find(".slot").on("acceptCard", function(ev, card) {
+            $(ev.target).replaceWith(card);
+            if (!eq.find(".slot").exists()) {
+                const cards = eq.find(".card");
+                assert(cards.length == 5, "Equation looks weird.");
+                game.combine($(cards[0]), $(cards[2]), $(cards[4]));
+            }
+        });
+        $(".equations").prepend(eq);
     },
     result(c1, c2, e1, e2) {
         if (!gameData[key]) {
@@ -60,16 +58,6 @@ const game = {
         return $('<div class="card fire" data-element="fire" ><span class="name">fire</span></div>');
     }
 };
-
-function Slot(html) {
-    const ret = {
-        html: html,
-        acceptCard: function(card) {
-            this.html.replaceWith(card);
-            this.trigger("accept", card);
-        }
-    }
-}
 
 function Card(html, draggable) {
     const ret = {
@@ -114,7 +102,7 @@ function Card(html, draggable) {
 
                 if (currentDroppable) {
                     if (oldParentHtml[0] == document.body) debugger;
-                    game.onDragDrop(me, $(currentDroppable));
+                    $(currentDroppable).trigger("acceptCard", me)
                 } else {
                     me.remove();
                 }
@@ -143,4 +131,5 @@ $(document).ready((ev)=> {
     $(".draggable").each((index, item) => {
         new Card(item, true);
     });
+    game.addEmptyEquation();
 });
