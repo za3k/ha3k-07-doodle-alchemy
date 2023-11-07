@@ -13,11 +13,11 @@ const gameData = {
 const game = {
     async combine(card1, card2, outcome) {
         console.log(`${card1.data("element")} plus ${card2.data("element")} equals ${outcome}`);
-        const key = `${card1.data("element")}-${card2.data("element")}`;
+        const e1=card1.data("element"), e2=card2.data("element");
+        const key = e1 < e2 ? `${e1}-${e2}` : `${e2}-${e1}`;
         if (!gameData[key]) {
-            const newCard = await game.promptOldElement(card1, card2);
             //TODO: promptNewElement & game.discover(newCard);
-            gameData[key] = newCard.data("element");
+            gameData[key] = await game.promptOldElement(card1, card2);
         }
 
         outcome.replaceWith(game.makeCard(gameData[key]));
@@ -25,17 +25,22 @@ const game = {
             game.addEmptyEquation();
         }
     },
-    async promptOldElement(c1, c2) {
+    promptOldElement(c1, c2) { return new Promise((resolve) => {
         $(".promptOld .discoveredElements").remove();
         $(".promptOld .equation > :nth-child(1)").replaceWith(c1.clone());
         $(".promptOld .equation > :nth-child(3)").replaceWith(c2.clone());
-        $(".promptOld .equation > :nth-child(5)").replaceWith('<div class="question slot"></div>');
+        const slot = $('<div class="question slot"></div>');
+        $(".promptOld .equation > :nth-child(5)").replaceWith(slot);
         $(".promptOld")
             .append($("#elements").clone())
             .show();
         $(".promptOld .draggable").each((index, item) => { new Card(item, true); });
-        return c1.clone();
-    },
+        slot.on("acceptCard", (ev, cardDiv) => {
+            $(ev.target).replaceWith(cardDiv);
+            $(".promptOld").hide();
+            resolve($(cardDiv).data("element"));
+        });
+    }); },
     addEmptyEquation() {
         const eq = $('<div class="equation"> <div class="slot"></div> <div class="card plus"></div> <div class="slot"></div> <div class="card equals"></div> <div class="card question"></div> </div>')
         eq.find(".slot").on("acceptCard", function(ev, card) {
@@ -48,14 +53,10 @@ const game = {
         });
         $(".equations").prepend(eq);
     },
-    result(c1, c2, e1, e2) {
-        if (!gameData[key]) {
-            gameData[key] = p
-        }
-        return "fire";
-    },
     makeCard(e) {
-        return $('<div class="card fire" data-element="fire" ><span class="name">fire</span></div>');
+        const d = $(`<div class="card" data-element="${e}" ><span class="name">${e}</span></div>`);
+        if (["fire", "water", "air", "earth"].indexOf(e)>=0) d.addClass(e);
+        return d;
     }
 };
 
