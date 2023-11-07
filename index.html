@@ -13,13 +13,14 @@ Doodlemoji Alchemy
 TODO:
     [x] Display four element cards at the top
     [x] Display cards in equations
-    [ ] Allow dragging and dropping cards into equations (steal from hack-a-tile)
-    [ ] Make a new equations if they're all full
+    [x] Allow dragging and dropping cards into equations (steal from hack-a-tile)
+    [x] Make a new equations if they're all full
     [ ] Allow picking a new result when combining two cards. Remember the result
     [ ] Add localstorage save games
-    [ ] Allow drawing a new card, and rendering drawn cards (steal from doodle-rpg)
+    [ ] Allow selecting an emoji, and rendering selected cards
+    [ ] Allow doodling a new card, and rendering drawn cards (steal from doodle-rpg)
     [ ] Jen draws the four basic elements, + and =>
-    [ ] Add progress tracking to discovering 20 [8] elements.
+    [X] Add progress tracking to discovering 20 [8] elements.
     [ ] Add random results when combining cards
           (  N/20) pick an existing card
           (1-N/20) name + draw a new card
@@ -28,7 +29,7 @@ TODO:
 
 <h1>Doodlemoji alchemy</h1>
 <h3>Elements</h3>
-<div class="discoveredElements">
+<div class="discoveredElements" id="elements">
     <div class="card fire  draggable" data-element="fire" ><span class="name">fire</span></div>
     <div class="card earth draggable" data-element="earth"><span class="name">earth</span></div>
     <div class="card water draggable" data-element="water"><span class="name">water</span></div>
@@ -60,4 +61,16 @@ TODO:
         <div class="card question"></div>
     </div>
 </div>
+
+<div class="promptOld modal" style="display: none">
+    <h3>What did it make?</h3>
+    <div class="equation">
+        <div class="first"></div>
+        <div class="card plus"></div>
+        <div c;ass="second"></div>
+        <div class="card equals"></div>
+        <div class="question slot"></div>
+    </div>
+</div>
+
 </html>

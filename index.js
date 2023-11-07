@@ -1,20 +1,91 @@
+function assert(cond, text) {
+    if (!cond) console.log(text);
+}
+
+$.fn.exists = function () {
+    return this.length !== 0;
+}
+
+const gameData = {
+    "fire-water": "fire",
+}
+
 const game = {
-    drag(card, to) {
-        console.log(`Dragged ${card} to ${to}`); 
+    onDragDrop(card, slot) {
+        slot.replaceWith(card);
+        if (card.parent().hasClass("equation")) {
+            const equation = card.parent();
+            if (!equation.find(".slot").exists()) {
+                const cards = equation.find(".card");
+                assert(cards.length == 5, "Equation looks weird.");
+                game.combine($(cards[0]), $(cards[2]), $(cards[4]));
+            }
+        }
     },
+    async combine(card1, card2, outcome) {
+        console.log(`${card1.data("element")} plus ${card2.data("element")} equals ${outcome}`);
+        const key = `${card1.data("element")}-${card2.data("element")}`;
+        if (!gameData[key]) {
+            const newCard = await game.promptOldElement(card1, card2);
+            //TODO: promptNewElement & game.discover(newCard);
+            gameData[key] = newCard.data("element");
+        }
+
+        outcome.replaceWith(game.makeCard(gameData[key]));
+        if(!$(".equations .slot").exists()) {
+            game.addEmptyEquation();
+        }
+    },
+    async promptOldElement(c1, c2) {
+        $(".promptOld .discoveredElements").remove();
+        $(".promptOld .equation > :nth-child(1)").replaceWith(c1.clone());
+        $(".promptOld .equation > :nth-child(3)").replaceWith(c2.clone());
+        $(".promptOld .equation > :nth-child(5)").replaceWith('<div class="question slot"></div>');
+        $(".promptOld")
+            .append($("#elements").clone())
+            .show();
+        $(".promptOld .draggable").each((index, item) => { new Card(item, true); });
+        return c1.clone();
+    },
+    addEmptyEquation() {
+        $(".equations").prepend('    <div class="equation"> <div class="slot"></div> <div class="card plus"></div> <div class="slot"></div> <div class="card equals"></div> <div class="card question"></div> </div>')
+    },
+    result(c1, c2, e1, e2) {
+        if (!gameData[key]) {
+            gameData[key] = p
+        }
+        return "fire";
+    },
+    makeCard(e) {
+        return $('<div class="card fire" data-element="fire" ><span class="name">fire</span></div>');
+    }
 };
 
-function Card(id, draggable, html) {
+function Slot(html) {
     const ret = {
-        id: id,
+        html: html,
+        acceptCard: function(card) {
+            this.html.replaceWith(card);
+            this.trigger("accept", card);
+        }
+    }
+}
+
+function Card(html, draggable) {
+    const ret = {
+        id: $(html).data("element"),
         draggable: draggable,
         html: html,
+        copy: function(draggable) {
+            return new Card($(this.html).clone()[0], draggable);
+        },
         onMouseDown: function(ev) {
-            const me = $(this.html);
-            // TODO: Make a (non-draggable) copy and drag that instead
+            //if (!this.draggable) return;
+            const newCard = this.copy(true);
+            const me = $(newCard.html);
 
-            let shiftX = ev.clientX - me[0].getBoundingClientRect().left;
-            let shiftY = ev.clientY - me[0].getBoundingClientRect().top;
+            let shiftX = ev.clientX - this.html.getBoundingClientRect().left;
+            let shiftY = ev.clientY - this.html.getBoundingClientRect().top;
 
             const moveAt = ((pageX, pageY) => {
                 me.css("left", pageX - shiftX + "px");
@@ -41,17 +112,12 @@ function Card(id, draggable, html) {
                 me.css("top","");
                 me.css("zIndex","");
 
-                let error = "Drag tiles onto a square";
                 if (currentDroppable) {
                     if (oldParentHtml[0] == document.body) debugger;
-                    const oldParent = Square.fromDom(oldParentHtml);
-                    const newParent = Square.fromDom($(currentDroppable));
-                    error = game.onDragDrop(this, newParent);
+                    game.onDragDrop(me, $(currentDroppable));
+                } else {
+                    me.remove();
                 }
-                if (error) {
-                    oldParentHtml.append(me);
-                }
-                game.error(error);
             }
 
             function onMouseMove(ev) {
@@ -75,8 +141,6 @@ function Card(id, draggable, html) {
 
 $(document).ready((ev)=> {
     $(".draggable").each((index, item) => {
-        console.log("hi", index, item);
-        const element = $(item).data("element");
-        new Card(element, true, item);
+        new Card(item, true);
     });
 });

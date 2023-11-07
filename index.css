@@ -14,10 +14,15 @@
     justify-content: center;
     display: flex;
     position: relative;
-    font-size: 4rem;
-    text-align: center;
     border-radius: 5px;
     overflow: clip;
+    background: white;
+    text-align: center;
+    font-size: 4rem;
+}
+.dragged {
+    opacity: 100%;
+    box-shadow: 0 0 20px yellow;
 }
 .card .name {
     display: block;
@@ -32,10 +37,11 @@
     background: lightgrey;
 
 }
+.question, .equals, .plus { text-align: center; font-size: 4rem; }
 .card.plus, .card.equals { border: 0; }
 .card.plus::before     { content: "+"; }
 .card.equals::before   { content: "➡"; }
-.card.question::before { content: "?"; }
+.question::before { content: "?"; }
 
 .card.fire::before  { content: "🔥"; }
 .card.water::before { content: "🌊"; }
@@ -52,3 +58,22 @@
     flex-wrap: wrap;
 }
 
+.promptOld {
+    position: fixed;
+    background: white;
+    padding: 5re,;
+    border: 5px solid lightgrey;
+    margin: auto;
+    top: 5rem;
+    bottom: 5rem;
+    left: 5rem;
+    right: 5rem;
+    box-shadow: 0 0 100px black;
+    text-align: center;
+}
+.promptOld .equation {
+    justify-content: center;
+}
+.promptOld .discoveredElements .question {
+    display: none;
+}
