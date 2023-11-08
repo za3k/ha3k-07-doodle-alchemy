@@ -1,3 +1,12 @@
+html {
+    user-select: none;
+    position: relative;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+}
 
 .slot {
     width: 5rem;
@@ -40,6 +49,19 @@
     background: lightgrey;
     font-size: 10pt;
 }
+.card.art {
+    display: block;
+}
+.card img {
+    max-width: 90%;
+    max-height: 90%;
+    margin: 5px;
+    user-select: none;
+}
+.card.doodle {
+    background: darksalmon;
+}
+
 
 .elements {
     display: flex;
@@ -65,31 +87,16 @@
     text-align: center;
     display: flex;
     flex-direction: column;
+    z-index: 2;
 }
 .prompt .equation {
     justify-content: center;
 }
 .prompt .elements {
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
-html {
-    user-select: none;
-}
 
-.card.art {
-    display: block;
-}
-.card img {
-    max-width: 90%;
-    max-height: 90%;
-    margin: 5px;
-    user-select: none;
-}
-
-.card.doodle {
-    background: darksalmon;
-}
 
 /* === Easel === */
 
@@ -98,6 +105,7 @@ html {
     padding: 20px;
     width: min-content;
     left: 0px;
+    z-index: 2;
 
     position: fixed;
     background: white;
