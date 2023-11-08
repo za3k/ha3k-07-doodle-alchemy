@@ -20,8 +20,9 @@ const game = {
         if (!gameData[key]) {
             const total = $("#elements > .card").length;
             const unknown = $("#elements > .question").length;
-            const chanceNew = unknown / total;
-            if (Math.random() <= chanceNew) {
+            const chance = unknown / total;
+            if (chance > 0 && chance <= 0.2) chance = 0.2;
+            if (Math.random() <= chance) {
                 gameData[key] = await game.promptNewElement(card1, card2);
             } else {
                 gameData[key] = await game.promptOldElement(card1, card2);

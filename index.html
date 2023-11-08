@@ -10,25 +10,6 @@
 
 <body>
 
-<!--
-Doodlemoji Alchemy
-TODO:
-    [x] Display four element cards at the top
-    [x] Display cards in equations
-    [x] Allow dragging and dropping cards into equations (steal from hack-a-tile)
-    [x] Make a new equations if they're all full
-    [x] Allow picking a new result when combining two cards. Remember the result
-    [x] Add progress tracking to discovering 20 [8] elements.
-    [x] Allow selecting an emoji, and rendering selected cards
-    [x] Add random results when combining cards
-          (  N/20) pick an existing card
-          (1-N/20) [name +] draw a new card
-    [ ] Allow doodling a new card, and rendering drawn cards (steal from doodle-rpg)
-    [X] Add downloading the finished game as an image
-    [X] Add localstorage save games
-    [X] Jen draws the four basic elements, + and =>
--->
-
 <h1>Doodlemoji alchemy</h1>
 <h3>Elements</h3>
 <div class="elements" id="elements"></div>
@@ -49,12 +30,11 @@ TODO:
     <canvas height="398" width="398"></canvas>
     <div>Draw <span class="name">the element</span></div>
     <div class="hflex">
-        <input type="submit" class="btn btn-danger clear" value="Clear">
-        <input type="submit" class="btn btn-danger cancel" value="Cancel">
         <div></div>
         <img class="pencil tool tool-selected" data-tool="pencil" src="pencil.svg" />
         <img class="eraser tool" data-tool="eraser" src="eraser.svg" />
         <div></div>
+        <input type="submit" class="btn btn-danger clear" value="Clear">
         <input type="submit" class="btn btn-primary done" value="Done">
     </div>
 </div>
