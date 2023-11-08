@@ -13,8 +13,14 @@ const game = {
         const e1=card1.data("element"), e2=card2.data("element");
         const key = e1 < e2 ? `${e1}-${e2}` : `${e2}-${e1}`;
         if (!gameData[key]) {
-            //gameData[key] = await game.promptOldElement(card1, card2);
-            gameData[key] = await game.promptNewElement(card1, card2);
+            const total = $("#elements > .card").length;
+            const unknown = $("#elements > .question").length;
+            const chanceNew = unknown / total;
+            if (Math.random() <= chanceNew) {
+                gameData[key] = await game.promptNewElement(card1, card2);
+            } else {
+                gameData[key] = await game.promptOldElement(card1, card2);
+            }
             console.log(`${card1.data("element")} plus ${card2.data("element")} equals ${gameData[key]}`);
         }
 
