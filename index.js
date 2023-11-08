@@ -2,8 +2,15 @@ $.fn.exists = function () {
     return this.length !== 0;
 }
 
+$.fn.replaceWithCard = function (card) {
+    const d = $(card).clone();
+    new Card(d[0]);
+    this.replaceWith(d);
+}
+
 const gameData = {
-    emoji: {},
+    art: {},
+    cards: {},
 };
 
 const game = {
@@ -19,13 +26,24 @@ const game = {
             } else {
                 gameData[key] = await game.promptOldElement(card1, card2);
             }
-            console.log(`${card1.data("element")} plus ${card2.data("element")} equals ${gameData[key]}`);
+            console.log(`${card1.data("element")} plus ${card2.data("element")} equals ${gameData[key].data("element")}`);
         }
 
-        outcome.replaceWith(game.makeCard(gameData[key]));
+        outcome.replaceWithCard(gameData[key]);
         if(!$(".equations .slot").exists()) {
             game.addEmptyEquation();
         }
+    },
+    async promptDraw() {
+        const url = await game.easel.draw(10);
+        const name = `doodle ${game.doodleCount++}`;
+        gameData.art[name] = url;
+        const image = await game.easel.makeImage(url);
+        $(image).attr("draggable", "false");
+
+        const d = $(`<div class="card art" data-element="${name}"><span class="name">${name}</span></div>`);
+        d.prepend(image);
+        return d;
     },
     promptWith(c1, c2, choices) { return new Promise((resolve) => {
         $(".prompt .equation").replaceWith(game.makeEmptyEquation());
@@ -37,22 +55,26 @@ const game = {
         $(".prompt .equation .slot").on("acceptCard", (ev, cardDiv) => {
             $(ev.target).replaceWith(cardDiv);
             $(".prompt").hide();
-            resolve(cardDiv);
+            if ($(cardDiv).hasClass("doodle")) {
+                game.promptDraw("a new element").then(resolve);
+            } else {
+                resolve(cardDiv);
+            }
         });
 
         // Choices
         $(".prompt .elements").empty().append(choices.clone());
-        $(".prompt .card").each((index, item) => { new Card(item, true); });
+        $(".prompt .card").each((index, item) => { new Card(item); });
         $(".prompt").show();
     }); },
     async promptOldElement(c1, c2) { 
-        const cardDiv = await game.promptWith(c1, c2, $("#elements .card:not(.question)"));
-        return $(cardDiv).data("element");
+        const card = $(await game.promptWith(c1, c2, $("#elements .card:not(.question)")));
+        return card;
     },
     async promptNewElement(c1, c2) { 
         const card = $(await game.promptWith(c1, c2, $("#emoji .card")));
-        this.discoverElement(card.data("element"), card.data("emoji"));
-        return card.data("element");
+        this.discoverElement(card);
+        return card;
     },
     makeEmptyEquation() {
         return $('<div class="equation"><div class="slot"></div><div class="symbol">+</div><div class="slot"></div><div class="symbol">➡</div> <div class="card question">?</div> </div>');
@@ -71,31 +93,29 @@ const game = {
     addMysteryElement() {
         $("#elements").append('<div class="card question">?</div>');
     },
-    discoverElement(name, emoji) {
-        console.log("discovered", name, emoji);
-        gameData.emoji[name] = emoji;
-        const d = game.makeCard(name, emoji, true);
-        $("#elements .question").first().replaceWith(d);
+    makeDoodleCard() {
+        const d = game.makeEmojiCard("doodle", "🖌️");
+        d.addClass("doodle");
+        return d;
     },
-    makeCard(e, emoji, draggable) {
-        emoji = emoji || gameData.emoji[e];
-        const d = $(`<div class="card" data-element="${e}" data-emoji="${emoji}">${emoji}<span class="name">${e}</span></div>`);
-        if (draggable) new Card(d[0], true);
+    discoverElement(card) {
+        const name = card.data("element");
+        console.log("discovered", name, card);
+        gameData.cards[name] = card;
+        $("#elements .question").first().replaceWithCard(card);
+    },
+    makeEmojiCard(name, emoji) {
+        const d = $(`<div class="card" data-element="${name}">${emoji}<span class="name">${name}</span></div>`);
+        new Card(d[0]);
         return d;
     }
 };
 
-function Card(html, draggable) {
+function Card(html) {
     const ret = {
-        id: $(html).data("element"),
-        draggable: draggable,
         html: html,
-        copy: function(draggable) {
-            return new Card($(this.html).clone()[0], draggable);
-        },
         onMouseDown: function(ev) {
-            //if (!this.draggable) return;
-            const newCard = this.copy(true);
+            const newCard = new Card($(this.html).clone()[0]);
             const me = $(newCard.html);
 
             let shiftX = ev.clientX - this.html.getBoundingClientRect().left;
@@ -156,16 +176,16 @@ function Card(html, draggable) {
 $(document).ready((ev)=> {
     for (var i=0; i<20; i++) game.addMysteryElement();
 
-    game.discoverElement("fire", "🔥");
-    game.discoverElement("water", "🌊");
-    game.discoverElement("earth", "⛰️");
-    game.discoverElement("air", "💨");
+    game.discoverElement(game.makeEmojiCard("fire", "🔥"));
+    game.discoverElement(game.makeEmojiCard("water", "🌊"));
+    game.discoverElement(game.makeEmojiCard("earth", "⛰️"));
+    game.discoverElement(game.makeEmojiCard("air", "💨"));
     game.addEmptyEquation();
 
+    $("#emoji").append(game.makeDoodleCard());
     for ([e, name] of emoji) {
-        const d = game.makeCard(name, e);
-        d.data("name", name);
-        d.data("emoji", e);
-        $("#emoji").append(d);
+        $("#emoji").append(game.makeEmojiCard(name, e));
     }
+    game.easel = new Easel($(".easel"));
+    game.doodleCount=1;
 });

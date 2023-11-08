@@ -54,7 +54,7 @@
 .prompt {
     position: fixed;
     background: white;
-    padding: 5re,;
+    padding: 5rem;
     border: 5px solid lightgrey;
     margin: auto;
     top: 5rem;
@@ -75,4 +75,65 @@
 
 html {
     user-select: none;
+}
+
+.card.art {
+    display: block;
+}
+.card img {
+    max-width: 90%;
+    max-height: 90%;
+    margin: 5px;
+    user-select: none;
+}
+
+/* === Easel === */
+
+.easel {
+    display: block;
+    padding: 20px;
+    width: min-content;
+    left: 0px;
+
+    position: fixed;
+    background: white;
+    padding: 5re;
+    border: 5px solid lightgrey;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 0 100px black;
+    text-align: center;
+}
+
+.easel:not(.enabled) {
+    display: none;
+}
+
+.easel canvas {
+    --size: calc(min(100vw - 40px, 100vh - 164px));
+    width: var(--size);
+    height: var(--size);
+    border: 1px solid;
+    user-select: none;
+}
+
+.easel div {
+    width: 100%;
+    text-align: center;
+    font-size: 16pt;
+    max-height: 32px;
+}
+
+.tool {
+    height: 32px;
+    width: 32px;
+}
+
+.tool-selected {
+    border: 2px red solid;
+    padding: 2px;
+    margin-left: 10px;
 }
