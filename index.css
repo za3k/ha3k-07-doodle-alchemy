@@ -6,10 +6,10 @@
     margin: 0.5rem;
     position: relative;
 }
-.card {
+.card, .symbol {
+    box-sizing: content-box;
     width: 5rem;
     height: 7rem;
-    border: 1px solid black;
     margin: 0.5rem;
     justify-content: center;
     display: flex;
@@ -20,6 +20,10 @@
     text-align: center;
     font-size: 4rem;
 }
+.card {
+    border: 1px solid black;
+}
+.symbol { text-align: center; font-size: 4rem; border: 0; }
 .dragged {
     opacity: 100%;
     box-shadow: 0 0 20px yellow;
@@ -30,25 +34,13 @@
     text-align: center;
     font-size: 1rem;
     margin: 0px;
-    box-sizing: border-box;
     bottom: 0;
     left: -10px;
     right: -10px;
     background: lightgrey;
-
 }
-.question, .equals, .plus { text-align: center; font-size: 4rem; }
-.card.plus, .card.equals { border: 0; }
-.card.plus::before     { content: "+"; }
-.card.equals::before   { content: "➡"; }
-.question::before { content: "?"; }
 
-.card.fire::before  { content: "🔥"; }
-.card.water::before { content: "🌊"; }
-.card.earth::before { content: "⛰️"; }
-.card.air::before   { content: "💨"; }
-
-.discoveredElements {
+.elements {
     display: flex;
     flex-wrap: wrap;
 }
@@ -58,7 +50,7 @@
     flex-wrap: wrap;
 }
 
-.promptOld {
+.prompt {
     position: fixed;
     background: white;
     padding: 5re,;
@@ -71,9 +63,10 @@
     box-shadow: 0 0 100px black;
     text-align: center;
 }
-.promptOld .equation {
+.prompt .equation {
     justify-content: center;
 }
-.promptOld .discoveredElements .question {
-    display: none;
+
+html {
+    user-select: none;
 }

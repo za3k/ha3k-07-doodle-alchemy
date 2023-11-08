@@ -1,23 +1,21 @@
-function assert(cond, text) {
-    if (!cond) console.log(text);
-}
-
 $.fn.exists = function () {
     return this.length !== 0;
 }
 
 const gameData = {
-    "fire-water": "fire",
-}
+    emoji: {},
+};
+
+const emoji="🐶🐱🐭🐹🐰🦊🐻🐼🐻‍❄️🐨🐯🦁🐮🐷🐽🐸🐵🙈🙉🙊🐒🐔🐧🐦🐦‍⬛🐤🐣🐥🦆🦅🦉🦇🐺🐗🐴🦄🐝🪱🐛🦋🐌🐞🐜🪰🪲🪳🦟🦗🕷🕸🦂🐢🐍🦎🦖🦕🐙🦑🦐🦞🦀🪼🪸🐡🐠🐟🐬🐳🐋🦈🐊🐅🐆🦓🫏🦍🦧🦣🐘🦛🦏🐪🐫🦒🦘🦬🐃🐂🐄🐎🐖🐏🐑🦙🐐🦌🫎🐕🐩🦮🐕‍🦺🐈🐈‍⬛🪽🪶🐓🦃🦤🦚🦜🦢🪿🦩🕊🐇🦝🦨🦡🦫🦦🦥🐁🐀🐿🦔🐾🐉🐲🌵🎄🌲🌳🌴🪹🪺🪵🌱🌿☘️🍀🎍🪴🎋🍃🍂🍁🍄🐚🪨🌾💐🌷🪷🌹🥀🌺🌸🪻🌼🌻🌞🌝🌛🌜🌚🌕🌖🌗🌘🌑🌒🌓🌔🌙🌎🌍🌏🪐💫⭐️🌟✨⚡️☄️💥🔥🌪🌈☀️🌤⛅️🌥☁️🌦🌧⛈🌩🌨❄️☃️⛄️🌬💨💧💦🫧☔️☂️🌊🌫🍏🍎🍐🍊🍋🍌🍉🍇🍓🫐🍈🍒🍑🥭🍍🥥🥝🍅🍆🥑🥦🫛🥬🥒🌶🫑🌽🥕🫒🧄🧅🫚🥔🍠🫘🥐🥯🍞🥖🥨🧀🥚🍳🧈🥞🧇🥓🥩🍗🍖🦴🌭🍔🍟🍕🫓🥪🥙🧆🌮🌯🫔🥗🥘🫕🥫🍝🍜🍲🍛🍣🍱🥟🦪🍤🍙🍚🍘🍥🥠🥮🍢🍡🍧🍨🍦🥧🧁🍰🎂🍮🍭🍬🍫🍿🍩🍪🌰🥜🍯🥛🍼🫖☕️🍵🧃🥤🧋🫙🍶🍺🍻🥂🍷🫗🥃🍸🍹🧉🍾🧊🥄🍴🍽🥣🥡🥢🧂⚽️🏀🏈⚾️🥎🎾🏐🏉🥏🎱🪀🏓🏸🏒🏑🥍🏏🪃🥅⛳️🪁🏹🎣🤿🥊🥋🎽🛹🛼🛷⛸🥌🎿⛷🏂🪂🏋️‍♀️🏋️🏋️‍♂️🤼‍♀️🤼🤼‍♂️🤸‍♀️🤸🤸‍♂️⛹️‍♀️⛹️⛹️‍♂️🤺🤾‍♀️🤾🤾‍♂️🏌️‍♀️🏌️🏌️‍♂️🏇🧘‍♀️🧘🧘‍♂️🏄‍♀️🏄🏄‍♂️🏊‍♀️🏊🏊‍♂️🤽‍♀️🤽🤽‍♂️🚣‍♀️🚣🚣‍♂️🧗‍♀️🧗🧗‍♂️🚵‍♀️🚵🚵‍♂️🚴‍♀️🚴🚴‍♂️🏆🥇🥈🥉🏅🎖🏵🎗🎫🎟🎪🤹🤹‍♂️🤹‍♀️🎭🩰🎨🎬🎤🎧🎼🎹🥁🪘🪇🎷🎺🪗🎸🪕🎻🪈🎲♟🎯🎳🎮🎰🧩🚗🚕🚙🚌🚎🏎🚓🚑🚒🚐🛻🚚🚛🚜🦯🦽🦼🛴🚲🛵🏍🛺🚨🚔🚍🚘🚖🛞🚡🚠🚟🚃🚋🚞🚝🚄🚅🚈🚂🚆🚇🚊🚉✈️🛫🛬🛩💺🛰🚀🛸🚁🛶⛵️🚤🛥🛳⛴🚢⚓️🛟🪝⛽️🚧🚦🚥🚏🗺🗿🗽🗼🏰🏯🏟🎡🎢🛝🎠⛲️⛱🏖🏝🏜🌋⛰🏔🗻🏕⛺️🛖🏠🏡🏘🏚🏗🏭🏢🏬🏣🏤🏥🏦🏨🏪🏫🏩💒🏛⛪️🕌🕍🛕🕋⛩🛤🛣🗾🎑🏞🌅🌄🌠🎇🎆🌇🌆🏙🌃🌌🌉🌁⌚️📱📲💻⌨️🖥🖨🖱🖲🕹🗜💽💾💿📀📼📷📸📹🎥📽🎞📞☎️📟📠📺📻🎙🎚🎛🧭⏱⏲⏰🕰⌛️⏳📡🔋🪫🔌💡🔦🕯🪔🧯🛢🛍️💸💵💴💶💷🪙💰💳💎⚖️🪮🪜🧰🪛🔧🔨⚒🛠⛏🪚🔩⚙️🪤🧱⛓🧲🔫💣🧨🪓🔪🗡⚔️🛡🚬⚰️🪦⚱️🏺🔮📿🧿🪬💈⚗️🔭🔬🕳🩹🩺🩻🩼💊💉🩸🧬🦠🧫🧪🌡🧹🪠🧺🧻🚽🚰🚿🛁🛀🧼🪥🪒🧽🪣🧴🛎🔑🗝🚪🪑🛋🛏🛌🧸🪆🖼🪞🪟🛍🛒🎁🎈🎏🎀🪄🪅🎊🎉🪩🎎🏮🎐🧧✉️📩📨📧💌📥📤📦🏷🪧📪📫📬📭📮📯📜📃📄📑🧾📊📈📉🗒🗓📆📅🗑🪪📇🗃🗳🗄📋📁📂🗂🗞📰📓📔📒📕📗📘📙📚📖🔖🧷🔗📎🖇📐📏🧮📌📍✂️🖊🖋✒️🖌🖍📝✏️🔍🔎🔏🔐🔒🔓❤️🩷🧡💛💚💙🩵💜🖤🩶🤍🤎❤️‍🔥❤️‍🩹💔❣️💕💞💓💗💖💘💝💟☮️✝️☪️🪯🕉☸️✡️🔯🕎☯️☦️🛐⛎♈️♉️♊️♋️♌️♍️♎️♏️♐️♑️♒️♓️🆔⚛️🉑☢️☣️📴📳🈶🈚️🈸🈺🈷️✴️🆚💮🉐㊙️㊗️🈴🈵🈹🈲🅰️🅱️🆎🆑🅾️🆘❌⭕️🛑⛔️📛🚫💯💢♨️🚷🚯🚳🚱🔞📵🚭❗️❕❓❔‼️⁉️🔅🔆〽️⚠️🚸🔱⚜️🔰♻️✅🈯️💹❇️✳️❎🌐💠Ⓜ️🌀💤🏧🚾♿️🅿️🛗🈳🈂️🛂🛃🛄🛅🚹🚺🚼⚧🚻🚮🎦🛜📶🈁🔣ℹ️🔤🔡🔠🆖🆗🆙🆒🆕🆓0️⃣1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣9️⃣🔟🔢#️⃣*️⃣⏏️▶️⏸⏯⏹⏺⏭⏮⏩⏪⏫⏬◀️🔼🔽➡️⬅️⬆️⬇️↗️↘️↙️↖️↕️↔️↪️↩️⤴️⤵️🔀🔁🔂🔄🔃🎵🎶➕➖➗✖️🟰♾💲💱™️©️®️〰️➰➿🔚🔙🔛🔝🔜✔️☑️🔘🔴🟠🟡🟢🔵🟣⚫️⚪️🟤🔺🔻🔸🔹🔶🔷🔳🔲▪️▫️◾️◽️◼️◻️🟥🟧🟨🟩🟦🟪⬛️⬜️🟫🔈🔇🔉🔊🔔🔕📣📢👁‍🗨💬💭🗯♠️♣️♥️♦️🃏🎴🀄️🕐🕑🕒🕓🕔🕕🕖🕗🕘🕙🕚🕛🕜🕝🕞🕟🕠🕡🕢🕣🕤🕥🕦🕧✢✣✤✥✦✧★☆✯✡︎✩✪✫✬✭✮✶✷✵✸✹→⇒⟹⇨⇾➾⇢☛☞➔➜➙➛➝➞♠︎♣︎♥︎♦︎♤♧♡♢♚♛♜♝♞♟♔♕♖♗♘♙⚀⚁⚂⚃⚄⚅🂠⚈⚉⚆⚇𓀀𓀁𓀂𓀃𓀄𓀅𓀆𓀇𓀈𓀉𓀊𓀋𓀌𓀍𓀎𓀏𓀐𓀑𓀒𓀓𓀔𓀕𓀖𓀗𓀘𓀙𓀚𓀛𓀜𓀝🧌🪸🪷🪹🪺🫘🫗🫙🛝🛞🛟🪬🪩🪫🩼🩻🫧🪪🟰😮‍💨😵‍💫😶‍🌫️❤️‍🔥❤️‍🩹🙏🏼✍🏼💅🏼🤳🏼💪🏼🦵🏼🦶🏼👂🏼🦻🏼👃🏼👶🏼👧🏼🧒🏼🧳🌂☂️🧵🪡🪢🪭🧶👓🕶🥽🥼🦺👔👕👖🧣🧤🧥🧦👗👘🥻🩴🩱🩲🩳👙👚👛👜👝🎒👞👟🥾🥿👠👡🩰👢👑👒🎩🎓🧢⛑🪖💄💍💼👋🤚🖐✋🖖👌🤌🤏✌️🤞🫰🤟🤘🤙🫵🫱🫲🫸🫷🫳🫴👈👉👆🖕👇☝️👍👎✊👊🤛🤜👏🫶🙌👐🤲🤝🙏✍️💅🤳💪🦾🦵🦿🦶👣👂🦻👃🫀🫁🧠🦷🦴👀👁👅👄🫦💋🩸😀😃😄😁😆😅😂🤣🥲🥹☺️😊😇🙂🙃😉😌😍🥰😘😗😙😚😋😛😝😜🤪🤨🧐🤓😎🥸🤩🥳😏😒😞😔😟😕🙁☹️😣😖😫😩🥺😢😭😮‍💨😤😠😡🤬🤯😳🥵🥶😱😨😰😥😓🫣🤗🫡🤔🫢🤭🤫🤥😶😶‍🌫️😐😑😬🫨🫠🙄😯😦😧😮😲🥱😴🤤😪😵😵‍💫🫥🤐🥴🤢🤮🤧😷🤒🤕🤑🤠😈👿👹👺🤡💩👻💀☠️👽👾🤖🎃😺😸😹😻😼😽🙀😿😾";
 
 const game = {
     async combine(card1, card2, outcome) {
-        console.log(`${card1.data("element")} plus ${card2.data("element")} equals ${outcome}`);
         const e1=card1.data("element"), e2=card2.data("element");
         const key = e1 < e2 ? `${e1}-${e2}` : `${e2}-${e1}`;
         if (!gameData[key]) {
-            //TODO: promptNewElement & game.discover(newCard);
-            gameData[key] = await game.promptOldElement(card1, card2);
+            //gameData[key] = await game.promptOldElement(card1, card2);
+            gameData[key] = await game.promptNewElement(card1, card2);
+            console.log(`${card1.data("element")} plus ${card2.data("element")} equals ${gameData[key]}`);
         }
 
         outcome.replaceWith(game.makeCard(gameData[key]));
@@ -25,37 +23,60 @@ const game = {
             game.addEmptyEquation();
         }
     },
-    promptOldElement(c1, c2) { return new Promise((resolve) => {
-        $(".promptOld .discoveredElements").remove();
-        $(".promptOld .equation > :nth-child(1)").replaceWith(c1.clone());
-        $(".promptOld .equation > :nth-child(3)").replaceWith(c2.clone());
-        const slot = $('<div class="question slot"></div>');
-        $(".promptOld .equation > :nth-child(5)").replaceWith(slot);
-        $(".promptOld")
-            .append($("#elements").clone())
-            .show();
-        $(".promptOld .draggable").each((index, item) => { new Card(item, true); });
-        slot.on("acceptCard", (ev, cardDiv) => {
+    promptWith(c1, c2, choices) { return new Promise((resolve) => {
+        $(".prompt .equation").replaceWith(game.makeEmptyEquation());
+        $(".prompt .equation > :nth-child(1)").replaceWith(c1.clone());
+        $(".prompt .equation > :nth-child(3)").replaceWith(c2.clone());
+        $(".prompt .equation > :nth-child(5)").replaceWith('<div class="question slot"></div>');
+
+        // Slot
+        $(".prompt .equation .slot").on("acceptCard", (ev, cardDiv) => {
             $(ev.target).replaceWith(cardDiv);
-            $(".promptOld").hide();
-            resolve($(cardDiv).data("element"));
+            $(".prompt").hide();
+            resolve(cardDiv);
         });
+
+        // Choices
+        $(".prompt .elements").empty().append(choices.clone());
+        $(".prompt .card").each((index, item) => { new Card(item, true); });
+        $(".prompt").show();
     }); },
+    async promptOldElement(c1, c2) { 
+        const cardDiv = await game.promptWith(c1, c2, $("#elements .card:not(.question)"));
+        return $(cardDiv).data("element");
+    },
+    async promptNewElement(c1, c2) { 
+        const card = $(await game.promptWith(c1, c2, $("#emoji .card")));
+        this.discoverElement(card.data("element"), card.data("emoji"));
+        return card.data("element");
+    },
+    makeEmptyEquation() {
+        return $('<div class="equation"><div class="slot"></div><div class="symbol">+</div><div class="slot"></div><div class="symbol">➡</div> <div class="card question">?</div> </div>');
+    },
     addEmptyEquation() {
-        const eq = $('<div class="equation"> <div class="slot"></div> <div class="card plus"></div> <div class="slot"></div> <div class="card equals"></div> <div class="card question"></div> </div>')
+        const eq = game.makeEmptyEquation();
         eq.find(".slot").on("acceptCard", function(ev, card) {
             $(ev.target).replaceWith(card);
             if (!eq.find(".slot").exists()) {
                 const cards = eq.find(".card");
-                assert(cards.length == 5, "Equation looks weird.");
-                game.combine($(cards[0]), $(cards[2]), $(cards[4]));
+                game.combine($(cards[0]), $(cards[1]), $(cards[2]));
             }
         });
         $(".equations").prepend(eq);
     },
-    makeCard(e) {
-        const d = $(`<div class="card" data-element="${e}" ><span class="name">${e}</span></div>`);
-        if (["fire", "water", "air", "earth"].indexOf(e)>=0) d.addClass(e);
+    addMysteryElement() {
+        $("#elements").append('<div class="card question">?</div>');
+    },
+    discoverElement(name, emoji) {
+        console.log("discovered", name, emoji);
+        gameData.emoji[name] = emoji;
+        const d = game.makeCard(name, emoji, true);
+        $("#elements .question").first().replaceWith(d);
+    },
+    makeCard(e, emoji, draggable) {
+        emoji = emoji || gameData.emoji[e];
+        const d = $(`<div class="card" data-element="${e}" data-emoji="${emoji}">${emoji}<span class="name">${e}</span></div>`);
+        if (draggable) new Card(d[0], true);
         return d;
     }
 };
@@ -129,8 +150,18 @@ function Card(html, draggable) {
 }
 
 $(document).ready((ev)=> {
-    $(".draggable").each((index, item) => {
-        new Card(item, true);
-    });
+    for (var i=0; i<20; i++) game.addMysteryElement();
+
+    game.discoverElement("fire", "🔥");
+    game.discoverElement("water", "🌊");
+    game.discoverElement("earth", "⛰️");
+    game.discoverElement("air", "💨");
     game.addEmptyEquation();
+
+    for (e of emoji) {
+        const d = game.makeCard(e, e);
+        d.data("name", e);
+        d.data("emoji", e);
+        $("#emoji").append(d);
+    }
 });
