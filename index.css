@@ -62,9 +62,14 @@
     right: 5rem;
     box-shadow: 0 0 100px black;
     text-align: center;
+    display: flex;
+    flex-direction: column;
 }
 .prompt .equation {
     justify-content: center;
+}
+.prompt .elements {
+    overflow-y: scroll;
 }
 
 html {
