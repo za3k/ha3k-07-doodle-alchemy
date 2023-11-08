@@ -87,6 +87,10 @@ html {
     user-select: none;
 }
 
+.card.doodle {
+    background: darksalmon;
+}
+
 /* === Easel === */
 
 .easel {
